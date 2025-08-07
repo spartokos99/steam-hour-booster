@@ -9,7 +9,7 @@ FROM base AS install
 
 RUN mkdir -p /temp/prod
 COPY package.json bun.lock /temp/prod/
-RUN cd /temp/prod && bun install --frozen-lockfile --no-progress --verbose --production && echo "bun install done"
+RUN cd /temp/prod && bun install --frozen-lockfile --no-progress --verbose --production --disable-postinstall-scripts && echo "bun install done"
 
 FROM base AS release
 COPY --from=install /temp/prod/node_modules node_modules
